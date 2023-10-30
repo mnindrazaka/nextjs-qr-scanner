@@ -11,7 +11,7 @@ export default function Home() {
         const html5QrCode = new Html5Qrcode("reader");
         html5QrCode.start(
           { facingMode: "environment" },
-          { fps: 10, qrbox: { width: 250, height: 250 } },
+          { fps: 30, qrbox: { width: 250, height: 250 } },
           (decodedText) => {
             alert(decodedText);
           },
