@@ -9,7 +9,7 @@ export default function Home(props: HomeProps) {
   useEffect(() => {
     const html5QrCode = new Html5Qrcode("reader");
     html5QrCode.start(
-      { facingMode: "user" },
+      { facingMode: "environment" },
       { fps: 10, qrbox: { width: 250, height: 250 }, aspectRatio: 1 },
       (decodedText) => {
         alert(decodedText);
