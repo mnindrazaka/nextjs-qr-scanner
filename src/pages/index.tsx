@@ -1,26 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
-type HomeProps = {
-  datetime: string;
-};
+export default function Home() {
+  const [isCameraBlocked, setIsCameraBlocked] = useState(false);
 
-export default function Home(props: HomeProps) {
   useEffect(() => {
-    const html5QrCode = new Html5Qrcode("reader");
-    html5QrCode.start(
-      { facingMode: "environment" },
-      { fps: 10, qrbox: { width: 250, height: 250 } },
-      (decodedText) => {
-        alert(decodedText);
-      },
-      undefined
-    );
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then(function (stream) {
+        const html5QrCode = new Html5Qrcode("reader");
+        html5QrCode.start(
+          { facingMode: "environment" },
+          { fps: 10, qrbox: { width: 250, height: 250 } },
+          (decodedText) => {
+            alert(decodedText);
+          },
+          undefined
+        );
+      })
+      .catch(function (_error) {
+        setIsCameraBlocked(true);
+      });
   }, []);
 
   return (
     <div>
-      <div id="reader"></div>
+      {isCameraBlocked ? (
+        <div>
+          <p>Camera is blocked, please allow it</p>
+        </div>
+      ) : (
+        <div id="reader"></div>
+      )}
     </div>
   );
 }
