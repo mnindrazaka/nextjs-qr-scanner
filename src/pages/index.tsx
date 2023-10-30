@@ -10,7 +10,7 @@ export default function Home(props: HomeProps) {
     const html5QrCode = new Html5Qrcode("reader");
     html5QrCode.start(
       { facingMode: "environment" },
-      { fps: 10, qrbox: { width: 250, height: 250 }, aspectRatio: 1 },
+      { fps: 10, qrbox: { width: 250, height: 250 } },
       (decodedText) => {
         alert(decodedText);
       },
@@ -20,7 +20,7 @@ export default function Home(props: HomeProps) {
 
   return (
     <div>
-      <div id="reader" style={{ width: 600 }}></div>
+      <div id="reader"></div>
     </div>
   );
 }
